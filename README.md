@@ -21,8 +21,8 @@ sudo cp debian/lsyncd.init /etc/init.d/lsyncd && chmod +x /etc/init.d/lsyncd
 # Create config directory 
 sudo mkdir -p /etc/lsyncd/
 
-# Create config file
-sudo touch /etc/lsyncd/lsyncd.conf.lua
+# Copy config file
+sudo cp ./lsyncd.conf.lua /etc/lsyncd/lsyncd.conf.lua
 ```
 Install tools for processing static content:
 
@@ -36,3 +36,18 @@ sudo cd /usr/src/ && https://downloads.sourceforge.net/project/optipng/OptiPNG/o
 tar -xvzf optipng-0.7.6.tar.gz && cd optipng-0.7.6 && ./configure && make && make install
 ln -s /usr/local/bin/optipng /usr/bin/
 ```
+
+Configure lsyncd config:
+
+```bash
+sudo nano /etc/lsyncd/lsyncd.conf.lua
+```
+You must add section sync to config with target folder for processiong.
+Example:
+
+```lua
+
+sync{convert, source="path/to/folder"}
+
+```
+You can modify this config for minify CSS, Js etc.
